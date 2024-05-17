@@ -1,0 +1,1 @@
+## Llama3-7b on 2xT4 GPUs in K8s/OpenShift

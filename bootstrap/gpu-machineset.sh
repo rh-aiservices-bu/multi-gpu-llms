@@ -10,7 +10,8 @@
 ## A10G (label: NVIDIA-A10G-SHARED)
 # https://aws.amazon.com/ec2/instance-types/g5/
 # single gpu: g5.{2,4,8,16}xlarge
-# multi gpu:  g5.12xlarge
+# multi gpu:  g5.12xlarge (4x A10G)
+# multi gpu:  g5.48xlarge	 (8x A10G)
 
 ## A100 (label: NVIDIA-A100-SHARED)
 # https://aws.amazon.com/ec2/instance-types/p4/
@@ -24,7 +25,7 @@
 # https://aws.amazon.com/ec2/instance-types/dl1
 # 8 x gaudi:  dl1.24xlarge
 
-INSTANCE_TYPE="g4dn.12xlarge"
+INSTANCE_TYPE="g5.48xlarge"
 AZ="us-west-2a"
 NEW_NAME="worker-gpu-$INSTANCE_TYPE-$AZ"
 

@@ -6,3 +6,4 @@ namespace: multi-gpu-poc
 resources:
   - llm-deployment.yaml
   - llm-pvc.yaml
+  - llm-svc.yaml
