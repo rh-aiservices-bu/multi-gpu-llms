@@ -4,7 +4,7 @@ This repository provides instructions for deploying LLMs with Multi-GPUs in dist
 
 ## 1. Overview
 
-Large LLMs like [Llama-3-70b](meta-llama/Meta-Llama-3-70B) or [Falcon 180B]() may not fit in a single GPU.
+Large LLMs like [Llama-3-70b](meta-llama/Meta-Llama-3-70B) or [Falcon 180B](https://huggingface.co/blog/falcon-180b) may not fit in a single GPU.
 
 If training/serving a model on a single GPU is too slow or if the model’s weights do not fit in a single GPU’s memory, transitioning to a multi-GPU setup may be a viable option.
 
@@ -14,7 +14,7 @@ But serving large language models (LLMs) with multiple GPUs in a distributed env
 
 Before deploying a model in a distributed environment, it is important to check the memory footprint of the model.
 
-To begin estimating how much vRAM is required to serve your LLM, we can use three tools:
+To begin estimating how much vRAM is required to serve your LLM, we can use these tools:
 
 * [HF Model Memory Usage](https://huggingface.co/spaces/hf-accelerate/model-memory-usage)
 * [GPU Poor vRAM Calculator](https://rahulschand.github.io/gpu_poor/)
@@ -29,13 +29,22 @@ Among the different strategies, we can use [Tensor Parallelism](https://huggingf
 
 ### 3.1 Tensor Parallelism with Serving Runtimes
 
-* [vLLM supports distributed tensor-parallel](https://docs.vllm.ai/en/latest/serving/distributed_serving.html) inference and serving. Currently, we support Megatron-LM’s tensor parallel algorithm. We manage the distributed runtime with Ray. 
+Tensor parallelism is a technique used to fit large models across multiple GPUs.
+In Tensor Parallelism, each GPU processes a slice of a tensor and only aggregates the full tensor for operations requiring it.
+
+For example, when multiplying the input tensors with the first weight tensor, the matrix multiplication can be achieved by splitting the weight tensor column-wise, multiplying each column with the input separately, and then concatenating the separate outputs.
+
+These outputs are then transferred from the GPUs and concatenated to obtain the final result.
+
+![Tensor Parallelism](./docs/tp-diagram.png)
+
+* [vLLM supports distributed tensor-parallel](https://docs.vllm.ai/en/latest/serving/distributed_serving.html) inference and serving. Currently, vLLM support Megatron-LM’s tensor parallel algorithm. vLLM manage the distributed runtime with Ray. 
 
 * [HF-TGI supports distributed tensor-parallel](https://huggingface.co/docs/text-generation-inference/conceptual/tensor_parallelism)
 
 * [ODH TGI](https://github.com/opendatahub-io/text-generation-inference?tab=readme-ov-file#running-sharded-models-tensor-parallel) - Fork from IBM of [HF-TGI](https://huggingface.co/docs/text-generation-inference)
 
-> **IMPORTANT**: Check with the AI BU PMs or your account team to ensure that the model you are using supports tensor parallelism.
+> **IMPORTANT**: Check with the AI BU PMs or your account team to ensure that the Serving Runtime you are using **supports** tensor parallelism.
 
 There are two ways to use Tensor Parallelism:
 
