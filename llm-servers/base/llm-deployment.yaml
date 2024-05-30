@@ -79,7 +79,7 @@ spec:
             - name: shm
               mountPath: /dev/shm
           terminationMessagePolicy: File
-          image: ""
+          image: "quay.io/rh-aiservices-bu/vllm-openai-ubi9:0.4.2"
           args:
             - "--model"
             - mistralai/Mistral-7B-Instruct-v0.2

@@ -1,4 +1,4 @@
-# Distributed Serving with Multi-GPU LLMs in Kubernetes / OpenShift
+# Distributed Serving with Multi-GPU LLMs in OpenShift
 
 This repository provides instructions for deploying LLMs with Multi-GPUs in distributed OpenShift / Kubernetes nodes.
 
@@ -141,6 +141,12 @@ machineset.machine.openshift.io/worker-gpu-g5.2xlarge-us-west-2c created
 
 ### 8.2 Deploy the Demo Use Cases
 
+* Create the Namespace for the demo:
+
+```bash
+kubectl create ns multi-gpu-poc
+```
+
 #### 8.2.1 Deploy the Single Node - Multiple GPU Demos
 
 * For example if you want to deploy the Granite 7B model on 2xT4 GPUs, run the following command:
@@ -155,7 +161,11 @@ kubectl apply -k llm-servers/overlays/granite-7B/
 
 TBD
 
-## 9. Links of Interest
+### 9. Testing the Multi-GPU Demos
+
+* Check the [Testing Multi-GPU Demos section](./test-notebooks/README.md) for more details on how to test the deployed models.
+
+## 10. Links of Interest
 
 * [Distributed Serving Documentation](https://docs.vllm.ai/en/latest/serving/distributed_serving.html)
 * [vLLM Engine Args](https://docs.vllm.ai/en/latest/models/engine_args.html)
