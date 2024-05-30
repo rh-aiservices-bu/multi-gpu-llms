@@ -1,0 +1,15 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: llm1
+spec:
+  template:
+    spec:
+      containers:
+        - name: server
+          args:
+            - "--model"
+            - ibm-granite/granite-8b-code-instruct
+            - "--dtype"
+            - float16
+            - "--tensor-parallel-size=2"

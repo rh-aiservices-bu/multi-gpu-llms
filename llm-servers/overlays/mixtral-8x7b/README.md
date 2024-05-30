@@ -1,1 +1,1 @@
-# Mixtral 8x7B
+# Mixtral 8x7B on 8xA10G GPUs

@@ -1,0 +1,1 @@
+## Granite-7B on 2xT4 GPUs

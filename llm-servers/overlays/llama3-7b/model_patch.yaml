@@ -1,0 +1,15 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: llm1
+spec:
+  template:
+    spec:
+      containers:
+        - name: server
+          args:
+            - "--model"
+            - meta-llama/Meta-Llama-3-8B
+            - "--dtype"
+            - float16
+            - "--tensor-parallel-size=2"

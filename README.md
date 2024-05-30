@@ -87,10 +87,18 @@ Once you have employed these strategies and found them insufficient for your cas
 
 ## 6. Demos
 
-* Running Granite 7B on 2xT4 GPUs in K8s/OpenShift
-* Running Mistral 7B on 2xT4 GPUs in K8s/OpenShift
-* Running Llama3 7B on 2xT4 GPUs in K8s/OpenShift
-* Running Falcon 40B on 8xA10G GPUs in K8s/OpenShift
+## 6.1 Single Node - Multiple GPU Demos
+
+* [Running Granite 7B on 2xT4 GPUs](./llm-servers/overlays/granite-7B/README.md)
+* [Running Mistral 7B on 2xT4 GPUs](./llm-servers/overlays/mistral-7B/README.md)
+* [Running Llama3 7B on 2xT4 GPUs](./llm-servers/overlays/llama3-7B/README.md)
+* [Running Falcon 40B on 8xA10G GPUs](./llm-servers/overlays/falcon-40B/README.md)
+* [Running Mixtral 8x7B on 8xA10G GPUs](./llm-servers/overlays/falcon-40B/README.md)
+* [Running Llama2 7B on 2xT4 GPUs](./llm-servers/overlays/llama3-7B/README.md)
+
+## 6.2 Multi-Node - Multiple GPU Demos
+
+TBD
 
 ## 7. Demo Steps
 
@@ -124,6 +132,20 @@ machineset.machine.openshift.io/worker-gpu-g5.2xlarge-us-west-2c created
 ```
 
 ### 7.2 Deploy the Demo Use Cases
+
+#### 7.2.1 Deploy the Single Node - Multiple GPU Demos
+
+* For example if you want to deploy the Granite 7B model on 2xT4 GPUs, run the following command:
+
+```bash
+kubectl apply -k llm-servers/overlays/granite-7B/
+```
+
+> Check the README.md file in each overlay folder for more details on how to deploy the model.
+
+#### 7.2.2 Deploy the Multi-Node - Multiple GPU Demos
+
+TBD
 
 ## Links of Interest
 

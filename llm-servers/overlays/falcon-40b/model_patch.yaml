@@ -1,0 +1,15 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: llm1
+spec:
+  template:
+    spec:
+      containers:
+        - name: server
+          args:
+            - "--model"
+            - tiiuae/falcon-40b-instruct
+            - "--dtype"
+            - float16
+            - "--tensor-parallel-size=8"

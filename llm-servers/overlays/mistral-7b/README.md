@@ -1,1 +1,1 @@
-## Mistral 7B on 2xT4 GPUs in K8s/OpenShift
+## Mistral 7B on 2xT4 GPUs
