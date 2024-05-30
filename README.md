@@ -10,7 +10,13 @@ If training/serving a model on a single GPU is too slow or if the model’s weig
 
 But serving large language models (LLMs) with multiple GPUs in a distributed environment might be a challenging task.
 
-## 2. Checking the Memory Footprint of the Model
+## 2. Important Disclaimer
+
+* These demos/repositories are **not supported by OpenShift AI/RHOAI**; they rely on upstream projects.
+* This is prototyping/testing work intended to confirm functionality and determine the necessary requirements.
+* These features are **not available in the RHOAI dashboard**. If you want to implement them, you will need to adapt YAML files to fit your use case.
+
+## 3. Checking the Memory Footprint of the Model
 
 Before deploying a model in a distributed environment, it is important to check the memory footprint of the model.
 
@@ -21,13 +27,13 @@ To begin estimating how much vRAM is required to serve your LLM, we can use thes
 * [LLM Model VRAM Calculator](https://huggingface.co/spaces/NyxKrage/LLM-Model-VRAM-Calculator) (only for quantization models)
 * [LLM Explorer](https://llm.extractum.io/) to check raw model vRAM size consumption
 
-## 3. Using Multiple GPUs for serving an LLM
+## 4. Using Multiple GPUs for serving an LLM
 
 When a model is too big to fit on a single GPU, we can use [various techniques](https://huggingface.co/docs/transformers/perf_train_gpu_many#scalability-strategy) to optimize the memory utilization.
 
 Among the different strategies, we can use [Tensor Parallelism](https://huggingface.co/docs/transformers/perf_train_gpu_many#tensor-parallelism) to distribute the model across multiple GPUs.
 
-### 3.1 Tensor Parallelism with Serving Runtimes
+### 4.1 Tensor Parallelism with Serving Runtimes
 
 Tensor parallelism is a technique used to fit large models across multiple GPUs.
 In Tensor Parallelism, each GPU processes a slice of a tensor and only aggregates the full tensor for operations requiring it.
@@ -51,9 +57,9 @@ There are two ways to use Tensor Parallelism:
 * In a single worker node with Multiple GPUs
 * Across multiple worker nodes with different GPUs allocated to each node.
 
-## 4. vLLM Tensor Parallelism (TP)
+## 5. vLLM Tensor Parallelism (TP)
 
-### 4.1 vLLM TP in single Worker Node with Multiple GPUs
+### 5.1 vLLM TP in single Worker Node with Multiple GPUs
 
 To run [multi-GPU serving in one single Worker Node](https://docs.vllm.ai/en/latest/serving/distributed_serving.html) (with multiple GPUs), pass in the --tensor-parallel-size argument when starting the server. This argument specifies the number of GPUs to use for tensor parallelism.
 
@@ -69,7 +75,7 @@ To run [multi-GPU serving in one single Worker Node](https://docs.vllm.ai/en/lat
   - "--tensor-parallel-size=2"
 ```
 
-### 4.2 vLLM TP in multiple Worker Nodes with Multiple GPUs
+### 5.2 vLLM TP in multiple Worker Nodes with Multiple GPUs
 
 > WIP
 
@@ -77,7 +83,7 @@ To scale vLLM beyond a single Worker Node, start a [Ray runtime](https://docs.ra
 
 After that, you can run inference and serving on multiple machines by launching the vLLM process on the head node by setting tensor_parallel_size to the number of GPUs to be the total number of GPUs across all machines.
 
-## 5. Optimizing Memory Utilization on a Single GPU
+## 6. Optimizing Memory Utilization on a Single GPU
 
 We can use [Quantization techniques](./docs/quant.md) to reduce the memory footprint of the model and try to fit the LLM in one single GPU. But there are several other techniques (like [FlashAttention-2](https://huggingface.co/docs/transformers/perf_infer_gpu_one#flashattention-2)) that can be used to reduce the memory footprint of the model.
 
@@ -85,9 +91,9 @@ We can use [Quantization techniques](./docs/quant.md) to reduce the memory footp
 
 Once you have employed these strategies and found them insufficient for your case on a single GPU, consider moving to multiple GPUs.
 
-## 6. Demos
+## 7. Demos
 
-## 6.1 Single Node - Multiple GPU Demos
+## 7.1 Single Node - Multiple GPU Demos
 
 * [Running Granite 7B on 2xT4 GPUs](./llm-servers/overlays/granite-7B/README.md)
 * [Running Mistral 7B on 2xT4 GPUs](./llm-servers/overlays/mistral-7B/README.md)
@@ -96,13 +102,13 @@ Once you have employed these strategies and found them insufficient for your cas
 * [Running Mixtral 8x7B on 8xA10G GPUs](./llm-servers/overlays/falcon-40B/README.md)
 * [Running Llama2 7B on 2xT4 GPUs](./llm-servers/overlays/llama3-7B/README.md)
 
-## 6.2 Multi-Node - Multiple GPU Demos
+## 7.2 Multi-Node - Multiple GPU Demos
 
 TBD
 
-## 7. Demo Steps
+## 8. Demo Steps
 
-### 7.1 Provision the GPU nodes in OpenShift (optional)
+### 8.1 Provision the GPU nodes in OpenShift (optional)
 
 > If you have already GPUs installed in your OpenShift cluster, you can skip this step.
 
@@ -131,9 +137,9 @@ machineset.machine.openshift.io/worker-gpu-g5.2xlarge-us-west-2c created
 --- New machineset worker-gpu-g5.2xlarge-us-west-2c created.
 ```
 
-### 7.2 Deploy the Demo Use Cases
+### 8.2 Deploy the Demo Use Cases
 
-#### 7.2.1 Deploy the Single Node - Multiple GPU Demos
+#### 8.2.1 Deploy the Single Node - Multiple GPU Demos
 
 * For example if you want to deploy the Granite 7B model on 2xT4 GPUs, run the following command:
 
@@ -143,11 +149,11 @@ kubectl apply -k llm-servers/overlays/granite-7B/
 
 > Check the README.md file in each overlay folder for more details on how to deploy the model.
 
-#### 7.2.2 Deploy the Multi-Node - Multiple GPU Demos
+#### 8.2.2 Deploy the Multi-Node - Multiple GPU Demos
 
 TBD
 
-## Links of Interest
+## 9. Links of Interest
 
 * [Distributed Serving Documentation](https://docs.vllm.ai/en/latest/serving/distributed_serving.html)
 * [vLLM Engine Args](https://docs.vllm.ai/en/latest/models/engine_args.html)
