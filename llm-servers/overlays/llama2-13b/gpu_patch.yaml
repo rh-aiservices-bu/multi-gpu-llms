@@ -9,4 +9,4 @@ spec:
         - name: server
           resources:
             limits:
-              nvidia.com/gpu: "8"
+              nvidia.com/gpu: "2"

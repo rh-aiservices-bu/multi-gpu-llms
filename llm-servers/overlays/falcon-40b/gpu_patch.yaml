@@ -10,3 +10,5 @@ spec:
           resources:
             limits:
               nvidia.com/gpu: "8"
+              cpu: "40"
+              memory: 190Gi

@@ -7,3 +7,4 @@ resources:
 patchesStrategicMerge:
   - model_patch.yaml
   - gpu_patch.yaml
+  - shm_patch.yaml

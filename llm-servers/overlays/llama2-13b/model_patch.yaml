@@ -12,4 +12,4 @@ spec:
             - meta-llama/Llama-2-13b-chat-hf
             - "--dtype"
             - float16
-            - "--tensor-parallel-size=8"
+            - "--tensor-parallel-size=2"

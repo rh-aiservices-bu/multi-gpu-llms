@@ -102,7 +102,7 @@ Once you have employed these strategies and found them insufficient for your cas
 * [Running Llama3 7B on 2xT4 GPUs](./llm-servers/overlays/llama3-7B/README.md)
 * [Running Falcon 40B on 8xA10G GPUs](./llm-servers/overlays/falcon-40B/README.md)
 * [Running Mixtral 8x7B on 8xA10G GPUs](./llm-servers/overlays/falcon-40B/README.md)
-* [Running Llama2 7B on 2xT4 GPUs](./llm-servers/overlays/llama3-7B/README.md)
+* [Running Llama2 13B on 2xA10G GPUs](./llm-servers/overlays/llama2-13B/README.md)
 
 ## 7.2 Multi-Node - Multiple GPU Demos
 
