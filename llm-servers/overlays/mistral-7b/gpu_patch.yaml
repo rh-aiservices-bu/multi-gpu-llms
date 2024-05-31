@@ -10,3 +10,5 @@ spec:
           resources:
             limits:
               nvidia.com/gpu: "2"
+              cpu: "8"
+              memory: 32Gi

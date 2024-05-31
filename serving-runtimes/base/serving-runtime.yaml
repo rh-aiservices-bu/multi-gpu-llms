@@ -1,0 +1,49 @@
+apiVersion: serving.kserve.io/v1alpha1
+kind: ServingRuntime
+metadata:
+  annotations:
+    opendatahub.io/accelerator-name: migrated-gpu
+    opendatahub.io/apiProtocol: REST
+    opendatahub.io/template-display-name: vLLM No Max Model Length
+    opendatahub.io/template-name: vllm-no-max
+    openshift.io/display-name: granite-7b-base-tp
+  name: granite-7b-base-tp
+  labels:
+    opendatahub.io/dashboard: "true"
+spec:
+  builtInAdapter:
+    modelLoadingTimeoutMillis: 90000
+  containers:
+    - args:
+        - --model
+        - /mnt/models/
+        - --download-dir
+        - /models-cache
+        - --port
+        - "8080"
+        - --tensor-parallel-size=2
+      image: quay.io/rh-aiservices-bu/vllm-openai-ubi9:0.4.2
+      name: kserve-container
+      ports:
+        - containerPort: 8080
+          name: http1
+          protocol: TCP
+      resources:
+        limits:
+          cpu: "12"
+          memory: 24Gi
+        requests:
+          cpu: "4"
+          memory: 8Gi
+      volumeMounts:
+        - mountPath: /dev/shm
+          name: shm
+  multiModel: false
+  supportedModelFormats:
+    - autoSelect: true
+      name: pytorch
+  volumes:
+    - emptyDir:
+        medium: Memory
+        sizeLimit: 2Gi
+      name: shm

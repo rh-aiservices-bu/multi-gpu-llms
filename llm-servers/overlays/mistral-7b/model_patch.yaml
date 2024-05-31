@@ -9,7 +9,7 @@ spec:
         - name: server
           args:
             - "--model"
-            - mistralai/Mistral-7B-Instruct-v0.3
+            - mistralai/Mistral-7B-Instruct-v0.2
             - "--dtype"
             - float16
             - "--tensor-parallel-size=2"

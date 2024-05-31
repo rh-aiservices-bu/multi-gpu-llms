@@ -1,18 +1,16 @@
-## Mistral 7B on 2xT4 GPUs
+## Granite-7B on 2xT4 GPUs
 
 This demo shows how to deploy the Mistral 7B model on 2xT4 GPUs.
 
 ### Usage
 
-* Deploy the Mistral 7B model on 2xT4 GPUs:
+* Deploy the Granite 7B model on 2xT4 GPUs:
 
 ```bash
-kubectl apply -k llm-servers/overlays/mistral-7b
+kubectl apply -k overlays/granite-7B
 ```
 
 * Remember to add your HUGGING_FACE_HUB_TOKEN into the Environment Variables to be able to download the model from the Hugging Face Hub.
-
-> Due to [Mistral-7B-Instruct-v0.3](https://github.com/vllm-project/vllm/issues/5061) issue with vLLM v0.4.2 we're using Mistral-7B-Instruct-v0.2
 
 * Check that the LLM is running properly:
 
@@ -26,6 +24,12 @@ llm1-f687846b9-68bvq   1/1     Running   0          2m1s
 
 ```bash
 kubectl logs -n multi-gpu-poc -l app=llm1
+```
+
+> The output should be similar to:
+
+```bash
+Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 0.0 tokens/s, Running: 0 reqs, Swapped: 0 reqs, Pending: 0 reqs, GPU KV cache usage: 0.0%, CPU KV cache usage: 0.0%
 ```
 
 * Check the NVIDIA GPU consumption:
@@ -50,15 +54,15 @@ kubectl exec -n nvidia-gpu-operator $POD_NAME -- nvidia-smi
 |                                         |                      |                  N/A |
 +-----------------------------------------+----------------------+----------------------+
 |   1  Tesla T4                       On  | 00000000:00:1C.0 Off |                    0 |
-| N/A   34C    P0              26W /  70W |  11237MiB / 15360MiB |      0%      Default |
+| N/A   30C    P8              14W /  70W |      0MiB / 15360MiB |      0%      Default |
 |                                         |                      |                  N/A |
 +-----------------------------------------+----------------------+----------------------+
 |   2  Tesla T4                       On  | 00000000:00:1D.0 Off |                    0 |
-| N/A   34C    P0              27W /  70W |  11229MiB / 15360MiB |      0%      Default |
+| N/A   39C    P0              27W /  70W |  14129MiB / 15360MiB |      0%      Default |
 |                                         |                      |                  N/A |
 +-----------------------------------------+----------------------+----------------------+
 |   3  Tesla T4                       On  | 00000000:00:1E.0 Off |                    0 |
-| N/A   30C    P8              14W /  70W |      0MiB / 15360MiB |      0%      Default |
+| N/A   38C    P0              26W /  70W |  14101MiB / 15360MiB |      0%      Default |
 |                                         |                      |                  N/A |
 +-----------------------------------------+----------------------+----------------------+
 ```
