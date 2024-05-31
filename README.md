@@ -97,7 +97,7 @@ Once you have employed these strategies and found them insufficient for your cas
 
 ## 7.1 Single Node - Multiple GPU Demos
 
-* [Running Granite 7B on 2xT4 GPUs](./llm-servers/overlays/granite-7B/README.md)
+* [Running Granite 8B on 2xT4 GPUs](./llm-servers/overlays/granite-8B/README.md)
 * [Running Mistral 7B on 2xT4 GPUs](./llm-servers/overlays/mistral-7B/README.md)
 * [Running Llama3 7B on 2xT4 GPUs](./llm-servers/overlays/llama3-7B/README.md)
 * [Running Falcon 40B on 8xA10G GPUs](./llm-servers/overlays/falcon-40B/README.md)
