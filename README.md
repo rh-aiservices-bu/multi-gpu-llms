@@ -46,7 +46,7 @@ These outputs are then transferred from the GPUs and concatenated to obtain the 
 
 ![Tensor Parallelism](./docs/tp-diagram.png)
 
-* [vLLM supports distributed tensor-parallel](https://docs.vllm.ai/en/latest/serving/distributed_serving.html) inference and serving. Currently, vLLM support Megatron-LM’s tensor parallel algorithm. vLLM manage the distributed runtime with Ray. 
+* [vLLM supports distributed tensor-parallel](https://docs.vllm.ai/en/latest/serving/distributed_serving.html) inference and serving. Currently, vLLM support Megatron-LM’s tensor parallel algorithm. vLLM manage the distributed runtime with Ray or Python MultiProcessing.
 
 * [HF-TGI supports distributed tensor-parallel](https://huggingface.co/docs/text-generation-inference/conceptual/tensor_parallelism)
 
@@ -60,6 +60,8 @@ There are two ways to use Tensor Parallelism:
 * Across multiple worker nodes with different GPUs allocated to each node.
 
 ## 5. vLLM Tensor Parallelism (TP)
+
+Multiprocessing can be used when deploying on a single node, multi-node inferencing currently requires Ray.
 
 ### 5.1 vLLM TP in single Worker Node with Multiple GPUs
 
@@ -81,7 +83,7 @@ To run [multi-GPU serving in one single Worker Node](https://docs.vllm.ai/en/lat
 
 > WIP
 
-To scale vLLM beyond a single Worker Node, start a [Ray runtime](https://docs.ray.io/en/latest/ray-core/starting-ray.html) via CLI before running vLLM.
+To [scale vLLM beyond a single Worker Node](https://docs.vllm.ai/en/stable/serving/distributed_serving.html), start a [Ray runtime](https://docs.ray.io/en/latest/ray-core/starting-ray.html) via CLI before running vLLM.
 
 After that, you can run inference and serving on multiple machines by launching the vLLM process on the head node by setting tensor_parallel_size to the number of GPUs to be the total number of GPUs across all machines.
 
