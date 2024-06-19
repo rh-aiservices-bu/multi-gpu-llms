@@ -1,6 +1,6 @@
 # Distributed Serving with Multi-GPU LLMs in OpenShift
 
-This repository provides instructions for deploying LLMs with Multi-GPUs in distributed OpenShift / Kubernetes nodes.
+This repository provides instructions for deploying LLMs with Multi-GPUs in distributed OpenShift / Kubernetes worker nodes.
 
 ## 1. Overview
 
