@@ -2,6 +2,27 @@
 
 This repository provides instructions for deploying LLMs with Multi-GPUs in distributed OpenShift / Kubernetes worker nodes.
 
+## Table of Contents
+- [Overview](#1-overview)
+- [Important Disclaimer](#2-important-disclaimer)
+- [Checking the Memory Footprint of the Model](#3-checking-the-memory-footprint-of-the-model)
+- [Using Multiple GPUs for Serving an LLM](#4-using-multiple-gpus-for-serving-an-llm)
+  - [Tensor Parallelism with Serving Runtimes](#41-tensor-parallelism-with-serving-runtimes)
+- [vLLM Tensor Parallelism (TP)](#5-vllm-tensor-parallelism-tp)
+  - [vLLM TP in Single Worker Node with Multiple GPUs](#51-vllm-tp-in-single-worker-node-with-multiple-gpus)
+  - [vLLM TP in Multiple Worker Nodes with Multiple GPUs](#52-vllm-tp-in-multiple-worker-nodes-with-multiple-gpus)
+- [Optimizing Memory Utilization on a Single GPU](#6-optimizing-memory-utilization-on-a-single-gpu)
+- [Demos](#7-demos)
+  - [Single Node - Multiple GPU Demos](#71-single-node---multiple-gpu-demos)
+  - [Multi-Node - Multiple GPU Demos](#72-multi-node---multiple-gpu-demos)
+- [Demo Steps](#8-demo-steps)
+  - [Provision the GPU nodes in OpenShift (optional)](#81-provision-the-gpu-nodes-in-openshift-optional)
+  - [Deploy the Demo Use Cases](#82-deploy-the-demo-use-cases)
+    - [Deploy the Single Node - Multiple GPU Demos](#821-deploy-the-single-node---multiple-gpu-demos)
+    - [Deploy the Multi-Node - Multiple GPU Demos](#822-deploy-the-multi-node---multiple-gpu-demos)
+- [Testing the Multi-GPU Demos](#9-testing-the-multi-gpu-demos)
+- [Links of Interest](#10-links-of-interest)
+
 ## 1. Overview
 
 Large LLMs like [Llama-3-70b](meta-llama/Meta-Llama-3-70B) or [Falcon 180B](https://huggingface.co/blog/falcon-180b) may not fit in a single GPU.
