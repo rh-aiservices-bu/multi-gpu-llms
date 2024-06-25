@@ -120,12 +120,12 @@ Once you have employed these strategies and found them insufficient for your cas
 
 ## 7.1 Single Node - Multiple GPU Demos
 
-* [Running Granite 8B on 2xT4 GPUs](./llm-servers/overlays/granite-8B/README.md)
-* [Running Mistral 7B on 2xT4 GPUs](./llm-servers/overlays/mistral-7B/README.md)
-* [Running Llama3 7B on 2xT4 GPUs](./llm-servers/overlays/llama3-7B/README.md)
-* [Running Falcon 40B on 8xA10G GPUs](./llm-servers/overlays/falcon-40B/README.md)
-* [Running Mixtral 8x7B on 8xA10G GPUs](./llm-servers/overlays/mixtral-8x7B/README.md)
-* [Running Llama2 13B on 2xA10G GPUs](./llm-servers/overlays/llama2-13B/README.md)
+* [Running Granite 8B on 2xT4 GPUs](./llm-servers/overlays/granite-8b/README.md)
+* [Running Mistral 7B on 2xT4 GPUs](./llm-servers/overlays/mistral-7b/README.md)
+* [Running Llama3 7B on 2xT4 GPUs](./llm-servers/overlays/llama3-7b/README.md)
+* [Running Falcon 40B on 8xA10G GPUs](./llm-servers/overlays/falcon-40b/README.md)
+* [Running Mixtral 8x7B on 8xA10G GPUs](./llm-servers/overlays/mixtral-8x7b/README.md)
+* [Running Llama2 13B on 2xA10G GPUs](./llm-servers/overlays/llama2-13b/README.md)
 
 ## 7.2 Multi-Node - Multiple GPU Demos
 
