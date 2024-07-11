@@ -1,0 +1,59 @@
+apiVersion: machine.openshift.io/v1beta1
+kind: MachineSet
+metadata:
+  name: aro-cluster-worker-gpu3-eastus1
+  namespace: openshift-machine-api
+  labels:
+    machine.openshift.io/cluster-api-cluster: aro-cluster-zkn6x-kgd47
+    machine.openshift.io/cluster-api-machine-role: worker
+    machine.openshift.io/cluster-api-machine-type: worker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      machine.openshift.io/cluster-api-cluster: aro-cluster-zkn6x-kgd47
+      machine.openshift.io/cluster-api-machineset: aro-cluster-zkn6x-kgd47-worker-eastus1
+  template:
+    metadata:
+      labels:
+        machine.openshift.io/cluster-api-cluster: aro-cluster-zkn6x-kgd47
+        machine.openshift.io/cluster-api-machine-role: worker
+        machine.openshift.io/cluster-api-machine-type: worker
+        machine.openshift.io/cluster-api-machineset: aro-cluster-zkn6x-kgd47-worker-eastus1
+    spec:
+      lifecycleHooks: {}
+      metadata: {}
+      providerSpec:
+        value:
+          osDisk:
+            diskSettings: {}
+            diskSizeGB: 128
+            managedDisk:
+              storageAccountType: Premium_LRS
+            osType: Linux
+          networkResourceGroup: openenv-zkn6x
+          publicLoadBalancer: aro-cluster-zkn6x-kgd47
+          userDataSecret:
+            name: worker-user-data
+          vnet: aro-vnet-zkn6x
+          credentialsSecret:
+            name: azure-cloud-credentials
+            namespace: openshift-machine-api
+          diagnostics: {}
+          zone: '1'
+          metadata:
+            creationTimestamp: null
+          publicIP: false
+          resourceGroup: aro-hs9w80dk
+          kind: AzureMachineProviderSpec
+          location: eastus
+          vmSize: Standard_NC4as_T4_v3
+          image:
+            offer: aro4
+            publisher: azureopenshift
+            resourceID: ''
+            sku: aro_412
+            version: 412.86.20230503
+          acceleratedNetworking: true
+          subnet: worker-subnet
+          apiVersion: machine.openshift.io/v1beta1
