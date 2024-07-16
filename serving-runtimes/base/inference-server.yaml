@@ -2,30 +2,34 @@ apiVersion: serving.kserve.io/v1beta1
 kind: InferenceService
 metadata:
   annotations:
-    openshift.io/display-name: granite-7b-base
-    serving.knative.openshift.io/enablePassthrough: "true"
-    sidecar.istio.io/inject: "true"
-    sidecar.istio.io/rewriteAppHTTPProbers: "true"
-  name: granite-7b-base
+    openshift.io/display-name: llama3-8B
+    serving.knative.openshift.io/enablePassthrough: 'true'
+    sidecar.istio.io/inject: 'true'
+    sidecar.istio.io/rewriteAppHTTPProbers: 'true'
+  name: llama3-8b
   labels:
-    opendatahub.io/dashboard: "true"
+    opendatahub.io/dashboard: 'true'
 spec:
   predictor:
     maxReplicas: 1
     minReplicas: 1
     model:
       modelFormat:
-        name: pytorch
-      name: ""
+        name: vLLM
+      name: ''
       resources:
         limits:
-          nvidia.com/gpu: "2"
+          cpu: '10'
+          memory: 20Gi
+          nvidia.com/gpu: '2'
         requests:
-          nvidia.com/gpu: "2"
-      runtime: granite-7b-base-tp
+          cpu: '6'
+          memory: 16Gi
+          nvidia.com/gpu: '2'
+      runtime: vllm-kserve-tp-mp
       storage:
         key: aws-connection-my-storage
-        path: models/granite-7b-base/
+        path: models/Meta-Llama-3-8B
     tolerations:
       - effect: NoSchedule
         key: nvidia.com/gpu

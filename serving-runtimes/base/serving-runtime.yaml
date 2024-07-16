@@ -2,48 +2,38 @@ apiVersion: serving.kserve.io/v1alpha1
 kind: ServingRuntime
 metadata:
   annotations:
-    opendatahub.io/accelerator-name: migrated-gpu
-    opendatahub.io/apiProtocol: REST
-    opendatahub.io/template-display-name: vLLM No Max Model Length
-    opendatahub.io/template-name: vllm-no-max
-    openshift.io/display-name: granite-7b-base-tp
-  name: granite-7b-base-tp
+    opendatahub.io/recommended-accelerators: '["nvidia.com/gpu"]'
+    openshift.io/display-name: vLLM ServingRuntime for KServe - TP MP - v0.4.2
+    opendatahub.io/template-display-name: vllm-kserve-tp-mp
+    opendatahub.io/template-name: vllm-kserve-tp-mp
   labels:
     opendatahub.io/dashboard: "true"
+  name: vllm-kserve-tp-mp
 spec:
-  builtInAdapter:
-    modelLoadingTimeoutMillis: 90000
+  annotations:
+    prometheus.io/path: /metrics
+    prometheus.io/port: "8080"
   containers:
     - args:
-        - --model
-        - /mnt/models/
-        - --download-dir
-        - /models-cache
-        - --port
-        - "8080"
+        - --port=8080
+        - --model=/mnt/models
+        - --served-model-name={{.Name}}
+        - --distributed-executor-backend=mp
         - --tensor-parallel-size=2
-      image: quay.io/rh-aiservices-bu/vllm-openai-ubi9:0.4.2
+        - --max-model-len=2048
+      command:
+        - python
+        - -m
+        - vllm.entrypoints.openai.api_server
+      env:
+        - name: HF_HOME
+          value: /tmp/hf_home
+      image: quay.io/modh/vllm@sha256:60f335015eff8c99508ff421c80f5f7b23b1310d87b0d4086b6f76f9a136b5a4
       name: kserve-container
       ports:
         - containerPort: 8080
-          name: http1
           protocol: TCP
-      resources:
-        limits:
-          cpu: "12"
-          memory: 24Gi
-        requests:
-          cpu: "4"
-          memory: 8Gi
-      volumeMounts:
-        - mountPath: /dev/shm
-          name: shm
   multiModel: false
   supportedModelFormats:
     - autoSelect: true
-      name: pytorch
-  volumes:
-    - emptyDir:
-        medium: Memory
-        sizeLimit: 2Gi
-      name: shm
+      name: vLLM
