@@ -120,6 +120,8 @@ Once you have employed these strategies and found them insufficient for your cas
 
 ## 7.1 Single Node - Multiple GPU Demos
 
+Deploy LLMs on Single Node/Worker and Multiple GPUs on the **SAME** node/worker
+
 * [Running Granite 8B on 2xT4 GPUs](./llm-servers/overlays/granite-8b/README.md)
 * [Running Mistral 7B on 2xT4 GPUs](./llm-servers/overlays/mistral-7b/README.md)
 * [Running Llama3 7B on 2xT4 GPUs](./llm-servers/overlays/llama3-7b/README.md)
@@ -129,7 +131,12 @@ Once you have employed these strategies and found them insufficient for your cas
 
 ## 7.2 Multi-Node - Multiple GPU Demos
 
-TBD
+Deploy LLMs on Multi-Node/Worker and Single/Multiple GPUs on **DIFFERENT** node/worker
+
+* [Running Llama3 8B on 2x Nodes with 1xT4 GPU each](https://github.com/rh-aiservices-bu/multi-node-multi-gpu-poc/?tab=readme-ov-file#53-check-and-validate-the-model-deployed-in-multi-node-with-multi-gpus)
+* [Running Mixtral 8x7B on 8x Nodes with 1xL40s GPU each](https://github.com/rh-aiservices-bu/multi-node-multi-gpu-poc/blob/main/docs/mixtral.md)
+
+> NOTE: These demos are in a [separated repository](https://github.com/rh-aiservices-bu/multi-node-multi-gpu-poc). At the moment, this repo it's under development (WIP) because this feature is currently only in the upstream. Once it is in the downstream, we will update this.
 
 ## 8. Demo Steps
 
